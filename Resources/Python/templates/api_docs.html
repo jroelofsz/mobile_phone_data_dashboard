@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container my-5">
+    <h1 class="mb-4">API Documentation</h1>
+
+    <!-- Endpoint Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5"><code>GET /api/v1/all</code></h2>
+        </div>
+        <div class="card-body">
+            <p>Returns a list of all mobile phone data.</p>
+
+            <h5>Request</h5>
+            <ul>
+                <li><strong>Method:</strong> GET</li>
+                <li><strong>URL:</strong> <code><a href="{{url_for('all')}}" target="_blank">/api/v1/all</a></code></li>
+                <li><strong>Description:</strong></li>
+            </ul>
+
+            <h5>Sample Response</h5>
+            <pre><code class="json">
+{
+    "0": {
+      "user_id": 1,
+      "device_model": "Google Pixel 5",
+      "operating_system": "Android",
+      "app_usage_minutes_per_day": 393,
+      "screen_time_hours_per_day": 6.4,
+      "battery_drain_mah_per_day": 1872,
+      "number_of_apps_installed": 67,
+      "data_usage_mb_per_day": 1122,
+      "age": 40,
+      "gender": "Male",
+      "user_behavior_class": 4
+    }
+}
+            </code></pre>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS (Optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

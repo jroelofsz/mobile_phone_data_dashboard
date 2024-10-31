@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Landing Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!--Header-->
+<section class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to the Mobile Phone Usage Data Dashboard!</h1>
+        <p class="lead">A simple, elegant solution for all your app marketing and development needs!</p>
+        <a href="{{url_for('api_docs')}}" class="btn btn-light btn-lg">View API Documentation</a>
+    </div>
+</section>
+
+<!-- Graph Section -->
+<section id="features" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="p-4 border rounded">
+                    <h3>GRAPH</h3>
+                    <img src="static/images/battery_drain_graph.png" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap JS and dependencies (Optional for functionality like modals, tooltips) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+</body>
+</html>

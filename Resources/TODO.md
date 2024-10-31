@@ -1,5 +1,10 @@
 # TODO
 
+## Setup
+
+- Create basic flask app and routes
+    - Jacob
+
 ## Top 3 Charts
 - Data, Battery, Screentime per Age Group 
     - Data: Jacob
