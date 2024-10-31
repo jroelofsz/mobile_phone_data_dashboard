@@ -1,14 +1,13 @@
 from flask import Flask, render_template, send_file
 import psycopg2
 import pandas as pd
-import matplotlib
-import matplotlib.pyplot as plt
+import plotly.express as px
 import scipy.stats as st
+import plotly 
+import plotly.utils 
+import json
 import numpy as np
-import io
 
-#configure matplotlib
-matplotlib.use('Agg')
 
 #Connect to the database
 conn_string = "host='localhost' dbname='phone_usage_db' user='postgres' password='postgres'"
@@ -29,35 +28,37 @@ app = Flask(__name__)
 # Define the route for the home page
 @app.route('/')
 def hello_world():
-    plot_battery_graph()
-    return render_template('index.html')
-
-def plot_battery_graph():
+    #render phone battery chart
     phone_df_battery = phone_df.copy()
-    
-    bins = [18,25,35,50]
-    labels = ["18-25","25-35","35-50"]
+    bins = [18, 25, 35, 50]
+    labels = ["18-25", "25-35", "35-50"]
     phone_df_battery['age_groups'] = pd.cut(phone_df_battery['age'], bins, labels=labels)
-    
+
+    # Calculating mean battery drain for each age group
     mean_battery_age = phone_df_battery.groupby(["age_groups"])["battery_drain_mah_per_day"].mean()
+    mean_battery_age_df = pd.DataFrame({"age_groups": mean_battery_age.index, "average_battery_drain": mean_battery_age.values})
+
+    # Creating a bar chart using Plotly
+    fig = px.bar(
+        mean_battery_age_df,
+        x="age_groups",
+        y="average_battery_drain",
+        #title="Average Battery Drain Per Age Group",
+        labels={"age_groups": "Age Groups", "average_battery_drain": "Battery Drain (mah/day)"},
+        text_auto=True
+    )
+
+    # Customizing the figure's appearance
+    fig.update_layout(
+        #xaxis_title="Age Groups",
+        yaxis_title="Battery Drain (mah/day)",
+        yaxis_range=[0, mean_battery_age.max() + 500],
+        template="plotly_white"
+    )
     
-    #Bar chart for Average Battery Drain vs. Age 
-    mean_battery_age_df = pd.DataFrame({"average_battery_drain": mean_battery_age})
-    reset_df_battery = mean_battery_age_df.reset_index()
-    reset_df_battery["average_battery_drain"].astype(int)
-    x_axis = np.arange(len(mean_battery_age))
-    plt.figure(figsize=(10, 6))
-    plt.bar(x_axis, reset_df_battery["average_battery_drain"], color ='blue', alpha=0.5, align="center")
-    plt.xlim(-0.75,len(x_axis)-0.25)
-    plt.ylim(0,max(mean_battery_age)+500)
-    tick_locations = [value for value in x_axis]
-    plt.xticks(tick_locations, reset_df_battery["age_groups"])
-    plt.title("Average Battery Drain Per Age Group")
-    plt.xlabel("Age Groups")
-    plt.ylabel("Battery Drain (mah/day)") 
+    graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     
-    plt.savefig('static/images/battery_drain_graph.png')
-    plt.close()
+    return render_template('index.html', graph_json=graph_json)
     
 
     

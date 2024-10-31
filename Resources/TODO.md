@@ -22,11 +22,11 @@
 
 ## API Paths
 - Collect start_age and end_age, return all data for ages in between
-    - Didem
-- Returns all data
     - Jacob
-- Collect gender preference, return all data for that gender
+- Returns all data
     - Didem
+- Collect gender preference, return all data for that gender
+    - Jacob - If I get to it
 
 ## Age Group Buckets
 - 18-25, 25-35, 35-50
