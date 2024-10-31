@@ -12,7 +12,7 @@
     - Screentime: Jacob
 - Overall Phone Type Usage per Age Group 
     - Didem
-- Overall OS type per Age Group 
+- ~~Overall OS type per Age Group~~
     - Jacob
 
 ### Optional
@@ -21,12 +21,17 @@
 
 
 ## API Paths
-- Collect start_age and end_age, return all data for ages in between
+- ~~Collect start_age and end_age, return all data for ages in between~~
     - Jacob
-- Returns all data
+- ~~Returns all data~~
     - Didem
 - Collect gender preference, return all data for that gender
     - Jacob - If I get to it
+## Presentation
+- Slides
+- Readme
+
+
 
 ## Age Group Buckets
 - 18-25, 25-35, 35-50

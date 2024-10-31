@@ -8,11 +8,16 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <section class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4">API Documentation</h1>
+            <p class="lead">Explore comprehensive documentation for our API that enables seamless integration and custom data analysis. This API offers robust endpoints for data retrieval, processing, and detailed user analytics. Perfect for developers looking to build, automate, or enhance analytical capabilities within their applications.</p>
+            <a href="{{url_for('hello_world')}}" class="btn btn-light btn-lg">Home</a>
+        </div>
+    </section>
 
 <div class="container my-5">
-    <h1 class="mb-4">API Documentation</h1>
-
-    <!-- Endpoint Section -->
+    <!-- All Section -->
     <div class="card mb-4">
         <div class="card-header">
             <h2 class="h5"><code>GET /api/v1/all</code></h2>
@@ -29,21 +34,57 @@
 
             <h5>Sample Response</h5>
             <pre><code class="json">
-{
-    "0": {
-      "user_id": 1,
-      "device_model": "Google Pixel 5",
-      "operating_system": "Android",
-      "app_usage_minutes_per_day": 393,
-      "screen_time_hours_per_day": 6.4,
-      "battery_drain_mah_per_day": 1872,
-      "number_of_apps_installed": 67,
-      "data_usage_mb_per_day": 1122,
-      "age": 40,
-      "gender": "Male",
-      "user_behavior_class": 4
+    {
+        "age": 40,
+        "app_usage_minutes_per_day": 393,
+        "battery_drain_mah_per_day": 1872,
+        "data_usage_mb_per_day": 1122,
+        "device_model": "Google Pixel 5",
+        "gender": "Male",
+        "number_of_apps_installed": 67,
+        "operating_system": "Android",
+        "screen_time_hours_per_day": 6.4,
+        "user_behavior_class": 4,
+        "user_id": 1
     }
-}
+
+            </code></pre>
+        </div>
+    </div>
+
+    <!-- All Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5">
+                <code>GET /api/v1/&lt;start_age&gt;/&lt;end_age&gt;</code>
+            </h2>
+        </div>
+        <div class="card-body">
+            <p>Returns all data for users with their age in between and including the start and end age.</p>
+
+            <h5>Request</h5>
+            <ul>
+                <li><strong>Method:</strong> GET</li>
+                <li><strong>URL:</strong> <code><a href="{{url_for('ageReturn', start_age=30, end_age =50)}}" target="_blank">/api/v1/&lt;start_age&gt;/&lt;end_age&gt;</a></code></li>
+                <li><strong>Description:</strong></li>
+            </ul>
+
+            <h5>Sample Response</h5>
+            <pre><code class="json">
+    {
+        "age": 40,
+        "app_usage_minutes_per_day": 393,
+        "battery_drain_mah_per_day": 1872,
+        "data_usage_mb_per_day": 1122,
+        "device_model": "Google Pixel 5",
+        "gender": "Male",
+        "number_of_apps_installed": 67,
+        "operating_system": "Android",
+        "screen_time_hours_per_day": 6.4,
+        "user_behavior_class": 4,
+        "user_id": 1
+    }
+
             </code></pre>
         </div>
     </div>
