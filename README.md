@@ -1,4 +1,4 @@
-# Chart Rendering Web Application
+# Mobile Device Usage Dashboard
 
 This project is a web-based application that visualizes data through interactive charts powered by Plotly. We designed it with app developers in mind, aiming to empower them to gain a deeper understanding of the market before committing to the development of an app, product, or hardware.
 
