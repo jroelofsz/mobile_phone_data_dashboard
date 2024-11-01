@@ -1,37 +1,22 @@
 # TODO
 
-## Setup
-
-- Create basic flask app and routes
-    - Jacob
-
-## Top 3 Charts
+## Visualization
 - Data, Battery, Screentime per Age Group 
     - Data: Jacob
-    - Battery: Didem
-    - Screentime: Jacob
+    - Screentime: Didem
 - Overall Phone Type Usage per Age Group 
     - Didem
-- ~~Overall OS type per Age Group~~
-    - Jacob
-
-### Optional
-- Male/Female Age Buckets vs Data Usage
-- Phone Type vs Age
 
 
-## API Paths
-- ~~Collect start_age and end_age, return all data for ages in between~~
-    - Jacob
-- ~~Returns all data~~
-    - Didem
-- Collect gender preference, return all data for that gender
-    - Jacob - If I get to it
+## Technical
+- **Interactivity**
+    - Implement a dropdown for different views of the charts - Jacob
+
 ## Presentation
-- Slides
-- Readme
-
-
-
-## Age Group Buckets
-- 18-25, 25-35, 35-50
+- Slides : Both 
+- Readme : Jacob
+    - An overview of the project and its purpose
+    - Instructions on how to use and interact with the project
+    - At least one paragraph summarizing efforts for ethical considerations made in the project
+    - References for the data source(s)
+    - References for any code used that is not your own
