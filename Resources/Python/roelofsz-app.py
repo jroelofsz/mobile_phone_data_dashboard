@@ -50,6 +50,10 @@ def hello_world():
         text_auto=True
     )
     
+    fig.update_layout(
+        yaxis_range=[0, mean_battery_age.max() + 500]
+    )
+    
     battery_drain_graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     
     ###########
@@ -71,17 +75,51 @@ def hello_world():
         y='user_count',
         color='Operating System',
         barmode='group',
-        labels={'user_count': 'Number of Users', 'age_groups': 'Age Groups'}
+        labels={'user_count': 'Number of Users', 'age_groups': 'Age Groups'},
+        text_auto=True
+    )
+    
+    fig.update_layout(
+        yaxis_range=[0, grouped_os_types_df.max() + 500]
     )
     
     os_type_graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     
+    #########
+    # Data Usage Chart
+    #########
+    data_usage_df = phone_df.copy()
+
+    bins = [18, 25, 35, 50]
+    labels = ["18-25", "25-35", "35-50"]
+    data_usage_df['age_groups'] = pd.cut(data_usage_df['age'], bins, labels=labels)
+
+    grouped_data_usage = data_usage_df.groupby(['age_groups'])['data_usage_mb_per_day'].mean()
+
+    grouped_data_usage_df = pd.DataFrame({'age_groups':grouped_data_usage.index,'avarage_data_usage':grouped_data_usage.values})
+
+    fig = px.bar(
+        grouped_data_usage_df,
+        x='age_groups',
+        y="avarage_data_usage",
+        labels={'age_groups': "Age Groups","average_data_usage":'Average Data Usage (mb)'},
+        text_auto=True
+    )
+
+    fig.update_layout(
+        yaxis_range=[0, grouped_data_usage.max() + 500]
+    )
+    
+    data_usage_graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    
     return render_template(
         'index.html', 
         battery_drain_graph_json=battery_drain_graph_json, 
-        os_type_graph_json=os_type_graph_json
+        os_type_graph_json=os_type_graph_json,
+        data_usage_graph_json=data_usage_graph_json
     )
     
+
 
     
 

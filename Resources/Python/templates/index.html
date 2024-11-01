@@ -26,25 +26,36 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="p-4 border rounded">
-                    <h3>Average Battery Drain per Age Group</h3>
-                    <div id="abdpagChart" class="w-100 text-center" style="height: 500px;"></div>
+                    <h3>Data Visulization</h3>
+                    <p>Select a value in the dropdown below to view the associated chart!</p>
+                    <select id='graphSelection' class='w-100 text-center'>
+                        <option value='battery'>Battery Drain MaH per Age Group</option>
+                        <option value='operatingSystem'>Operating System Count per Age Group</option>
+                        <option value='dataUsage'>Data Usage (mb) per Age Group</option>
+                    </select>
+                    <div id="chart" class="w-100 text-center" style="height: 500px;"></div>
                     <script>
                         var batteryDrainGraphData = {{ battery_drain_graph_json | safe}}
-                        Plotly.newPlot('abdpagChart', batteryDrainGraphData.data, batteryDrainGraphData.layout)
-                    </script>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="p-4 border rounded">
-                    <h3>Operating System Popularity per Age Group</h3>
-                    <div id="osppagChart" class="w-100 text-center" style="height: 500px;"></div>
-                    <script>
-                        var osGraphData = {{ os_type_graph_json | safe}}
-                        Plotly.newPlot('osppagChart', osGraphData.data, osGraphData.layout)
+                        var operatingSystemGraphData = {{ os_type_graph_json | safe}}
+                        var dataUsageGraphData = {{data_usage_graph_json | safe}}
+                        function renderChart(chartType){
+                            if (chartType == 'battery'){
+                                Plotly.newPlot('chart', batteryDrainGraphData.data, batteryDrainGraphData.layout)
+                            } else if (chartType == 'operatingSystem'){
+                                Plotly.newPlot('chart', operatingSystemGraphData.data, operatingSystemGraphData.layout)
+                            } else if (chartType == 'dataUsage'){
+                                Plotly.newPlot('chart', dataUsageGraphData.data, dataUsageGraphData.layout)
+                            }
+                        }
+                        
+                        //load default chart
+                        renderChart('battery')
+
+                        document.getElementById('graphSelection').addEventListener('change', function(){
+                            var selectedGraph = this.value
+                            renderChart(selectedGraph)
+                        })
+                        
                     </script>
                 </div>
             </div>
