@@ -112,11 +112,54 @@ def hello_world():
     
     data_usage_graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     
+    #########
+    # Screen Time Usage Chart
+    #########
+    screen_time_df = phone_df.copy()
+    bins = [18, 25, 35, 50]
+    labels = ["18-25", "25-35", "35-50"]
+    screen_time_df['age_groups'] = pd.cut(screen_time_df['age'], bins, labels=labels)
+    grouped_screen_time_df = screen_time_df.groupby(['age_groups'])['screen_time_hours_per_day'].mean()
+
+    grouped_screen_time_df = pd.DataFrame({'Age Groups':grouped_screen_time_df.index,'Average Screen On Time (hr/day)':grouped_screen_time_df.values})
+
+    fig_screen_time = px.bar(
+        grouped_screen_time_df.reset_index(),  # Temporarily reset index for plotting
+        x='Age Groups',
+        y='Average Screen On Time (hr/day)',
+
+        barmode='group',
+        labels={'average_screen_time': 'Average Screen On Time (hr/day)', 'age_groups': 'Age Groups'}
+    )
+    screen_time_graph_json = json.dumps(fig_screen_time, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    #######
+    # Phone Type Graph
+    #######
+    phone_types_df = phone_df.copy()
+    bins = [18, 25, 35, 50]
+    labels = ["18-25", "25-35", "35-50"]
+    phone_types_df['age_groups'] = pd.cut(phone_types_df['age'], bins, labels=labels)
+    grouped_phone_types_df = phone_types_df.groupby(['age_groups', 'device_model'])['user_id'].count().to_frame('phone_type_count')
+    # Rename columns in place without assignment
+    grouped_phone_types_df.index.set_names(['Age Groups', 'Device Model'], inplace=True)
+    fig_phone_type = px.bar(
+        grouped_phone_types_df.reset_index(),  # Temporarily reset index for plotting
+        x='Age Groups',
+        y='phone_type_count',
+        color='Device Model',
+        barmode='group',
+        labels={'phone_type_count': 'Device Model Counts', 'age_groups': 'Age Groups'}
+    )
+    phone_type_graph_json = json.dumps(fig_phone_type, cls=plotly.utils.PlotlyJSONEncoder)
+    
     return render_template(
         'index.html', 
         battery_drain_graph_json=battery_drain_graph_json, 
         os_type_graph_json=os_type_graph_json,
-        data_usage_graph_json=data_usage_graph_json
+        data_usage_graph_json=data_usage_graph_json,
+        screen_time_graph_json=screen_time_graph_json,
+        phone_type_graph_json=phone_type_graph_json
     )
     
 

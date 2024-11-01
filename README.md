@@ -1,11 +1,17 @@
 # Chart Rendering Web Application
 
-This project is a web-based application that visualizes data using interactive charts powered by Plotly. 
+This project is a web-based application that visualizes data through interactive charts powered by Plotly. We designed it with app developers in mind, aiming to empower them to gain a deeper understanding of the market before committing to the development of an app, product, or hardware.
+
+We offer two distinct methods for accessing this data:
+
+1. Pre-generated Charts: Users can view the data through five different pre-generated chart perspectives.
+
+2. API Access: Users can utilize our API to retrieve the data independently and conduct their own analyses.
 
 ## Features
 
-- **Average Battery Drain per Age Group**: Visualizes the average battery consumption for different age groups.
-- **Operating System Popularity per Age Group**: Displays the distribution of users by age group and operating system.
+- **Custom API**: Allows users to retrieve the entire dataset used in the visualizations, as well as specify a start age and end age to gather all matching records, allowing a more extensive and thorough analysis.
+- **Interactive Dropdown**: Allows user to select which type of chart they would like to visualize, we then serve this chart back.
 
 
 ## Technologies Used
@@ -16,7 +22,10 @@ This project is a web-based application that visualizes data using interactive c
 - **HTML, CSS, JavaScript**: For the frontend structure and behavior.
 - **psycopg2**: Used for connecting to the database and loading data into the application
 
+## Considerations
+This project utilizes a dataset from Kaggle to drive its visualizations. You can reference the original dataset and its authors [here](https://www.kaggle.com/datasets/valakhorasani/mobile-device-usage-and-user-behavior-dataset).
 
+Please note that this dataset does not contain any personal or identifying information about the users included. However, if you plan to replicate this project, please consider any applicable laws and regulations surrounding the use of the data you will be utilizing.
 ## Installation
 
 1. Clone the repository:
@@ -37,3 +46,8 @@ This project is a web-based application that visualizes data using interactive c
     - Pandas
     - Plotly
     - psycopg2
+
+## References
+The original creator of this dataset is [vala khorasani](https://www.kaggle.com/valakhorasani).
+
+You can reference their work at [https://www.kaggle.com/valakhorasani](https://www.kaggle.com/valakhorasani)

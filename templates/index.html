@@ -32,12 +32,16 @@
                         <option value='battery'>Battery Drain MaH per Age Group</option>
                         <option value='operatingSystem'>Operating System Count per Age Group</option>
                         <option value='dataUsage'>Data Usage (mb) per Age Group</option>
+                        <option value='phoneType'>Phone Type Count per Age Group</option>
+                        <option value='screenTime'>Average Screentime (hr/day) per Age group</option>
                     </select>
                     <div id="chart" class="w-100 text-center" style="height: 500px;"></div>
                     <script>
                         var batteryDrainGraphData = {{ battery_drain_graph_json | safe}}
                         var operatingSystemGraphData = {{ os_type_graph_json | safe}}
                         var dataUsageGraphData = {{data_usage_graph_json | safe}}
+                        var phoneTypeGraphData = {{phone_type_graph_json | safe}}
+                        var screenTimeGraphData = {{screen_time_graph_json | safe}}
                         function renderChart(chartType){
                             if (chartType == 'battery'){
                                 Plotly.newPlot('chart', batteryDrainGraphData.data, batteryDrainGraphData.layout)
@@ -45,6 +49,10 @@
                                 Plotly.newPlot('chart', operatingSystemGraphData.data, operatingSystemGraphData.layout)
                             } else if (chartType == 'dataUsage'){
                                 Plotly.newPlot('chart', dataUsageGraphData.data, dataUsageGraphData.layout)
+                            } else if (chartType == 'phoneType'){
+                                Plotly.newPlot('chart', phoneTypeGraphData.data, phoneTypeGraphData.layout)
+                            } else if (chartType == 'screenTime'){
+                                Plotly.newPlot('chart', screenTimeGraphData.data, screenTimeGraphData.layout)
                             }
                         }
                         
